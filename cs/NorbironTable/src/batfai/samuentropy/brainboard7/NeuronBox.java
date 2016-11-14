@@ -1,43 +1,7 @@
-/*
- * NeuronBox.java
- *
- * Norbiron Board
- * This is a case study for creating sprites for SamuEntropy/Brainboard.
- *
- * Copyright (C) 2016, Dr. Bátfai Norbert
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Ez a program szabad szoftver; terjeszthető illetve módosítható a
- * Free Software Foundation által kiadott GNU General Public License
- * dokumentumában leírtak; akár a licenc 3-as, akár (tetszőleges) későbbi
- * változata szerint.
- *
- * Ez a program abban a reményben kerül közreadásra, hogy hasznos lesz,
- * de minden egyéb GARANCIA NÉLKÜL, az ELADHATÓSÁGRA vagy VALAMELY CÉLRA
- * VALÓ ALKALMAZHATÓSÁGRA való származtatott garanciát is beleértve.
- * További részleteket a GNU General Public License tartalmaz.
- *
- * A felhasználónak a programmal együtt meg kell kapnia a GNU General
- * Public License egy példányát; ha mégsem kapta meg, akkor
- * tekintse meg a <http://www.gnu.org/licenses/> oldalon.
- *
- * Version history:
- *
- * 0.0.1, 6 Oct 16.
- */
+
 package batfai.samuentropy.brainboard7;
+
+import android.widget.TextView;
 
 /**
  *
@@ -45,16 +9,17 @@ package batfai.samuentropy.brainboard7;
  */
 public class NeuronBox implements Cloneable {
 
-    private Sprite[] neurons;
+    public static Sprite[] neurons;
 
     private android.graphics.Bitmap tiles;
     private android.graphics.Bitmap cover;
     android.graphics.Rect to;
     private int boxWidth;
     private int boxHeight;
-    private int x;
-    private int y;
-    int numberOfNeurons;
+    public int x;
+    public int y;
+    public static int numberOfNeurons;
+    public int covertype;
     protected static android.graphics.Paint boxPaint = new android.graphics.Paint();
     protected static android.graphics.Paint selectedBoxPaint = new android.graphics.Paint();
     protected int selectedBoxPaintSize = 0;
@@ -66,7 +31,7 @@ public class NeuronBox implements Cloneable {
 
     public NeuronBox(android.graphics.Bitmap tiles, int length, int width, int height,
             int numberOfNeurons,
-            android.graphics.Bitmap cover, int x, int y) {
+            android.graphics.Bitmap cover, int x, int y,int covertype) {
         this.x = x;
         this.y = y;
         this.tiles = tiles;
@@ -74,11 +39,13 @@ public class NeuronBox implements Cloneable {
         this.cover = cover;
         this.boxWidth = cover.getWidth();
         this.boxHeight = cover.getHeight();
+        this.covertype=covertype;
 
         to = new android.graphics.Rect(0, 0, boxWidth, boxHeight);
 
         this.numberOfNeurons = numberOfNeurons;
 
+        
         boxPaint.setColor(android.graphics.Color.argb(0xaf, 0xc4, 0xd9,
                 0xbf));
         boxPaint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
